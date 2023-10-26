@@ -1,8 +1,9 @@
-package pe.edu.cibertec.veterinariasw2;
+package pe.edu.cibertec.veterinariasw2.controladores;
 
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,5 +28,11 @@ public class MascotaController {
     @RequestMapping("obtenerMascotas")
     public List<Mascota> listarMascotas(){
         return mascotaRepository.findAll();
+    }
+
+    @PostMapping("registrarMascota")
+    public Long registrarMascota(Mascota mascota){
+        Mascota mascotaGuardada = mascotaRepository.save(mascota);
+        return mascotaGuardada.getId();
     }
 }
