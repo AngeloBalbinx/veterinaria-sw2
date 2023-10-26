@@ -2,8 +2,11 @@ package pe.edu.cibertec.veterinariasw2.controladores;
 
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -26,9 +29,21 @@ public class MascotaController {
     }*/
 
 
-    @GetMapping("obtenerMascotas")
+    @GetMapping("mascotas")
     public List<Mascota> listarMascotas(){
         return mascotaRepository.findAll();
+    }
+
+     @GetMapping("mascotas/{id}")
+    public ResponseEntity<Mascota>  findById(@PathVariable Long id){
+       /*  Optional<Mascota> mascotaOptional = mascotaRepository.findById(id);
+        if (mascotaOptional.isPresent()){
+            Mascota mascota = mascotaOptional.get();
+            return ResponseEntity.ok(mascota);
+        }
+            
+        return ResponseEntity.notFound().build(); */
+        return ResponseEntity.of(mascotaRepository.findById(id));
     }
 
     @PostMapping("registrarMascota")
